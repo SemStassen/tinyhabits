@@ -1,9 +1,12 @@
-import { Modal, Input } from "@/components";
+"use client";
+
+import { Modal, Input, Button } from "@/components";
 import { useFormState } from "react-dom";
 import { HiMiniPlus } from "react-icons/hi2";
+import createHabitAction from "./_actions/create-habit.action";
 
 function NewHabit() {
-  const [formState, onCreateHabitAction] = useFormState(() => null, {
+  const [formState, onCreateHabitAction] = useFormState(createHabitAction, {
     form: {
       name: "",
     },
@@ -18,7 +21,8 @@ function NewHabit() {
         description="Create a new habit to track."
       >
         <form action={onCreateHabitAction}>
-          <Input label="Name" name="name" defaultValue={formState?.form.name} />
+          <Input label="Name" name="name" defaultValue={formState.form.name} />
+          <Button>Create new habit</Button>
         </form>
       </Modal>
     </div>
