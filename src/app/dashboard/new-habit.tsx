@@ -3,7 +3,7 @@
 import { Modal, Input, Button } from "@/components";
 import { useFormState } from "react-dom";
 import { HiMiniPlus } from "react-icons/hi2";
-import createHabitAction from "./_actions/create-habit.action";
+import { createHabitAction } from "./_actions/create-habit.action";
 
 function NewHabit() {
   const [formState, onCreateHabitAction] = useFormState(createHabitAction, {

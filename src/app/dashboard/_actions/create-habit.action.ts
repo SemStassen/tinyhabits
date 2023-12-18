@@ -1,3 +1,8 @@
+"use server";
+
+import { createHabitUseCase } from "@/use-cases/habits/create-habit.use-case";
+import { createHabit } from "@/data-access/create-habit.persistence";
+
 type Form = {
   name: string;
 };
@@ -27,18 +32,33 @@ type CreateItemState = { form: Form } & (
   | DefaultState
 );
 
-async function createHabitAction(
+export async function createHabitAction(
   state: CreateItemState,
   formData: FormData,
 ): Promise<CreateItemState> {
-  console.log({ state, formData });
+  try {
+    await createHabitUseCase(
+      {
+        createHabit: createHabit,
+      },
+      {
+        name: formData.get("name") as string,
+      },
+    );
 
-  return {
-    form: {
-      name: "",
-    },
-    status: "success",
-  };
+    return {
+      form: {
+        name: "",
+      },
+      status: "success",
+    };
+  } catch (error) {
+    return {
+      form: {
+        name: "",
+      },
+      status: "error",
+      errors: "oops",
+    };
+  }
 }
-
-export default createHabitAction;

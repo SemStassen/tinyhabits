@@ -1,6 +1,4 @@
-import cn from "@/utils/cn";
-import clsx from "clsx";
-import { twMerge } from "tailwind-merge";
+import cn from "@/lib/utils/cn";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
