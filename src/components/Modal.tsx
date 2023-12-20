@@ -48,7 +48,6 @@ interface ModalCloseProps {
   children: React.ReactNode;
 }
 
-// make a Modal.Close component
 Modal.Close = function ModalClose({ children }: ModalCloseProps) {
   return <Dialog.Close>{children}</Dialog.Close>;
 };
