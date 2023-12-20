@@ -1,6 +1,6 @@
 import type { Config } from "drizzle-kit";
 
-if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL is not set");
 }
 
@@ -9,10 +9,6 @@ export default {
   out: "./drizzle/migrations",
   driver: "pg",
   dbCredentials: {
-    host: process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    port: 5432,
-    user: "postgres",
-    password: "KaatSkylos1!",
-    connectionString: process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    connectionString: process.env.DATABASE_URL,
   },
 } satisfies Config;

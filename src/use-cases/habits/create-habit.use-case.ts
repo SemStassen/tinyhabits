@@ -1,6 +1,6 @@
-import { HabitEntity } from "@/entitites/habit";
+import { HabitEntity, HabitEntityValidationError } from "@/entitites/habit";
 import type { createHabit } from "./types";
-import { habitToCreateToDto } from "./utils";
+import { ValidationError, habitToCreateHabitDtoMapper } from "./utils";
 
 export async function createHabitUseCase(
   context: {
@@ -11,11 +11,12 @@ export async function createHabitUseCase(
   },
 ) {
   try {
-    const habit = new HabitEntity({
+    const newHabit = new HabitEntity({
       name: data.name,
     });
-    await context.createHabit(habitToCreateToDto(habit));
-  } catch (error) {
-    console.log(error);
+    await context.createHabit(habitToCreateHabitDtoMapper(newHabit));
+  } catch (err) {
+    const error = err as HabitEntityValidationError;
+    throw new ValidationError(error.getErrors());
   }
 }

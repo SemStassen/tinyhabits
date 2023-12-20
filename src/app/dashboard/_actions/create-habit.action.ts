@@ -1,7 +1,9 @@
 "use server";
 
 import { createHabitUseCase } from "@/use-cases/habits/create-habit.use-case";
-import { createHabit } from "@/data-access/create-habit.persistence";
+import { createHabit } from "@/data-access/habits/create-habit.persistence";
+import { ValidationError } from "@/use-cases/habits/utils";
+import { revalidatePath } from "next/cache";
 
 type Form = {
   name: string;
@@ -36,29 +38,42 @@ export async function createHabitAction(
   state: CreateItemState,
   formData: FormData,
 ): Promise<CreateItemState> {
+  const name = formData.get("name") as string;
+
   try {
     await createHabitUseCase(
       {
         createHabit: createHabit,
       },
       {
-        name: formData.get("name") as string,
+        name,
       },
     );
-
+    revalidatePath("/");
     return {
       form: {
         name: "",
       },
       status: "success",
     };
-  } catch (error) {
-    return {
-      form: {
-        name: "",
-      },
-      status: "error",
-      errors: "oops",
-    };
+  } catch (err) {
+    const error = err as Error;
+    if (error instanceof ValidationError) {
+      return {
+        form: {
+          name,
+        },
+        status: "field-errors",
+        errors: error.getErrors(),
+      };
+    } else {
+      return {
+        form: {
+          name,
+        },
+        status: "error",
+        errors: error.message,
+      };
+    }
   }
 }

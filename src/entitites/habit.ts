@@ -1,4 +1,18 @@
-import { z } from "zod";
+import { ZodError, z } from "zod";
+
+type ValidatedFields = "name";
+export class HabitEntityValidationError extends Error {
+  private errors: Record<ValidatedFields, string | undefined>;
+
+  constructor(errors: Record<ValidatedFields, string | undefined>) {
+    super("An error occured validating a habit entity");
+    this.errors = errors;
+  }
+
+  getErrors() {
+    return this.errors;
+  }
+}
 
 export class HabitEntity {
   private id?: string;
@@ -26,8 +40,12 @@ export class HabitEntity {
 
     try {
       habitSchema.parse(this);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      const error = err as ZodError;
+      const errors = error.flatten().fieldErrors;
+      throw new HabitEntityValidationError({
+        name: errors.name?.[0],
+      });
     }
   }
 }

@@ -1,10 +1,16 @@
-import NewHabit from "./new-habit";
+import { getHabits } from "@/data-access/habits/get-habits.persistence";
+import CreateHabitForm from "./create-habit-form";
 
-function DashboardPage() {
+async function DashboardPage() {
+  const habits = await getHabits();
+
   return (
     <main className="min-h-screen p-8">
       <div className="grid grid-cols-6">
-        <NewHabit />
+        {habits.map((habit) => (
+          <div key={habit.id}>{habit.name}</div>
+        ))}
+        <CreateHabitForm />
       </div>
     </main>
   );
