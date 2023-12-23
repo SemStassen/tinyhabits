@@ -1,4 +1,7 @@
-import { HabitEntity, HabitEntityValidationError } from "@/entitites/habit";
+import {
+  HabitEntity,
+  HabitEntityValidationError,
+} from "@/entitites/habits/habit";
 import type { createHabit } from "./types";
 import { ValidationError, habitToCreateHabitDtoMapper } from "./utils";
 

@@ -15,10 +15,10 @@ export class HabitEntityValidationError extends Error {
 }
 
 export class HabitEntity {
-  private id?: string;
+  private id?: number;
   private name: string;
 
-  constructor({ id, name }: { id?: string; name: string }) {
+  constructor({ id, name }: { id?: number; name: string }) {
     this.id = id;
     this.name = name;
 

@@ -1,5 +1,5 @@
-import { HabitEntity } from "@/entitites/habit";
-import { createHabitDto } from "./types";
+import { HabitEntity } from "@/entitites/habits/habit";
+import { createHabitDto, habitDto } from "./types";
 
 export class ValidationError extends Error {
   private errors: Record<string, string | undefined>;
@@ -18,6 +18,19 @@ export function habitToCreateHabitDtoMapper(
   habit: HabitEntity,
 ): createHabitDto {
   return {
+    name: habit.getName(),
+  };
+}
+
+export function habitToDto(habit: HabitEntity): habitDto {
+  const habitId = habit.getId();
+
+  if (!habitId) {
+    throw new Error("Expected habit to have an id");
+  }
+
+  return {
+    id: habitId,
     name: habit.getName(),
   };
 }
