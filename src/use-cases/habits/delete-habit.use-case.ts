@@ -1,8 +1,8 @@
-import type { deleteHabit } from "./types";
+import type { DeleteHabit } from "./types";
 
 export async function deleteHabitUseCase(
   context: {
-    deleteHabit: deleteHabit;
+    deleteHabit: DeleteHabit;
   },
   data: {
     habitId: number;

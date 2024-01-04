@@ -1,18 +1,31 @@
 "use client";
 
-import { Modal, Input, SubmitButton } from "@/components";
+import {
+  Modal,
+  Input,
+  SubmitButton,
+  Button,
+  ErrorMessage,
+  EmojiPicker,
+} from "@/components";
 import { useFormState } from "react-dom";
-import { HiMiniPlus } from "react-icons/hi2";
 import { createHabitAction } from "./_actions/create-habit.action";
 import { useEffect, useRef, useState } from "react";
 
 function CreateHabitForm() {
+  const [selectedEmoji, setSelectedEmoji] = useState<string>("💧");
   const [formState, onCreateHabitAction] = useFormState(createHabitAction, {
     form: {
+      emojiNative: "",
       name: "",
+      quantity: "0",
+      step: "1",
+      unit: "",
     },
     status: "default",
   });
+
+  console.log(formState);
 
   const formRef = useRef<HTMLFormElement>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -25,23 +38,51 @@ function CreateHabitForm() {
   }, [formState]);
 
   return (
-    <div className="align-center flex aspect-square justify-center rounded-3xl border border-neutral-400 bg-neutral-200">
-      <Modal
-        trigger={<HiMiniPlus className="text-neutral-400" size={160} />}
-        title="New Habit"
-        description="Create a new habit to track."
-        open={modalIsOpen}
-        onOpenChange={setModalIsOpen}
-      >
-        <form action={onCreateHabitAction} ref={formRef}>
-          <Input label="Name" name="name" defaultValue={formState.form.name} />
-          <SubmitButton
-            submitText="create new habit"
-            idleText="creating habit..."
-          />
-        </form>
-      </Modal>
-    </div>
+    <Modal
+      trigger={<Button variant="success">New Habit</Button>}
+      title="New Habit"
+      description="Create a new habit to track."
+      open={modalIsOpen}
+      onOpenChange={setModalIsOpen}
+    >
+      <form action={onCreateHabitAction} ref={formRef}>
+        <EmojiPicker onEmojiSelect={(d) => setSelectedEmoji(d.native)} />
+        <input type="hidden" name="emojiNative" value={selectedEmoji} />
+
+        <Input label="Name" name="name" defaultValue={formState.form.name} />
+        {formState.status === "field-errors" && (
+          <ErrorMessage error={formState.errors.name} />
+        )}
+        <Input
+          label="Quantity"
+          name="quantity"
+          type="number"
+          defaultValue={formState.form.quantity}
+          min={0}
+        />
+        {formState.status === "field-errors" && (
+          <ErrorMessage error={formState.errors.quantity} />
+        )}
+        <Input
+          label="Step size"
+          name="step"
+          type="number"
+          defaultValue={formState.form.step}
+          min={1}
+        />
+        {formState.status === "field-errors" && (
+          <ErrorMessage error={formState.errors.step} />
+        )}
+        <Input label="Unit" name="unit" defaultValue={formState.form.unit} />
+        {formState.status === "field-errors" && (
+          <ErrorMessage error={formState.errors.unit} />
+        )}
+        <SubmitButton
+          submitText="create new habit"
+          idleText="creating habit..."
+        />
+      </form>
+    </Modal>
   );
 }
 

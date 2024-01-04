@@ -1,19 +1,17 @@
 import { getHabits } from "@/data-access/habits/get-habits.persistence";
-import CreateHabitForm from "./create-habit-form";
-import Habit from "./habit";
+import Habits from "./habits";
+import data from "@emoji-mart/data";
+import { init } from "emoji-mart";
+
+init({ data });
 
 async function DashboardPage() {
   const habits = await getHabits();
 
   return (
-    <main className="min-h-screen p-8">
-      <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-        {habits.map((habit) => (
-          <Habit key={habit.id} habit={habit} />
-        ))}
-        <CreateHabitForm />
-      </div>
-    </main>
+    <div className="min-h-screen space-y-4 p-8">
+      <Habits habits={habits} />
+    </div>
   );
 }
 

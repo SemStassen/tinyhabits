@@ -1,12 +1,16 @@
 "use server";
 
-import { createHabitUseCase } from "@/use-cases/create-habit.use-case";
+import { createHabitUseCase } from "@/use-cases/habits/create-habit.use-case";
 import { createHabit } from "@/data-access/habits/create-habit.persistence";
-import { ValidationError } from "@/use-cases/utils";
+import { ValidationError } from "@/use-cases/habits/utils";
 import { revalidatePath } from "next/cache";
 
 type Form = {
+  emojiNative: string;
   name: string;
+  quantity: string;
+  step: string;
+  unit?: string;
 };
 
 type FieldErrorsState = {
@@ -38,7 +42,11 @@ export async function createHabitAction(
   state: CreateHabitState,
   formData: FormData,
 ): Promise<CreateHabitState> {
+  const emojiNative = formData.get("emojiNative") as string;
   const name = formData.get("name") as string;
+  const quantity = formData.get("quantity") as string;
+  const step = formData.get("step") as string;
+  const unit = formData.get("unit") as string;
 
   try {
     await createHabitUseCase(
@@ -47,12 +55,21 @@ export async function createHabitAction(
       },
       {
         name,
+        emojiNative,
+        quantity: parseInt(quantity),
+        step: parseInt(step),
+        unit: unit,
       },
     );
+
     revalidatePath("/dashboard");
     return {
       form: {
+        emojiNative: "",
         name: "",
+        quantity: "0",
+        step: "1",
+        unit: "",
       },
       status: "success",
     };
@@ -61,7 +78,11 @@ export async function createHabitAction(
     if (error instanceof ValidationError) {
       return {
         form: {
+          emojiNative,
           name,
+          quantity,
+          step,
+          unit,
         },
         status: "field-errors",
         errors: error.getErrors(),
@@ -69,7 +90,11 @@ export async function createHabitAction(
     } else {
       return {
         form: {
+          emojiNative,
           name,
+          quantity,
+          step,
+          unit,
         },
         status: "error",
         errors: error.message,

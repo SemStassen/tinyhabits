@@ -2,8 +2,8 @@ import "server-only";
 
 import { db } from "@/db";
 import { habits } from "@/db/schema";
-import { createHabitDto } from "@/use-cases/types";
+import { CreateHabitDto } from "@/use-cases/habits/types";
 
-export async function createHabit(habit: createHabitDto): Promise<void> {
+export async function createHabit(habit: CreateHabitDto): Promise<void> {
   await db.insert(habits).values(habit);
 }
