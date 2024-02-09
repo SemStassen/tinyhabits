@@ -25,8 +25,6 @@ function CreateHabitForm() {
     status: "default",
   });
 
-  console.log(formState);
-
   const formRef = useRef<HTMLFormElement>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
