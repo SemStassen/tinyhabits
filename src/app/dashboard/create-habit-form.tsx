@@ -1,12 +1,12 @@
 "use client";
 
 import {
-  Modal,
   Input,
   SubmitButton,
   Button,
   ErrorMessage,
   EmojiPicker,
+  Modal,
 } from "@/components";
 import { useFormState } from "react-dom";
 import { createHabitAction } from "./_actions/create-habit.action";
@@ -37,7 +37,7 @@ function CreateHabitForm() {
 
   return (
     <Modal
-      trigger={<Button variant="success">New Habit</Button>}
+      trigger={<Button>New Habit</Button>}
       title="New Habit"
       description="Create a new habit to track."
       open={modalIsOpen}
@@ -46,11 +46,12 @@ function CreateHabitForm() {
       <form action={onCreateHabitAction} ref={formRef}>
         <EmojiPicker onEmojiSelect={(d) => setSelectedEmoji(d.native)} />
         <input type="hidden" name="emojiNative" value={selectedEmoji} />
-
-        <Input label="Name" name="name" defaultValue={formState.form.name} />
-        {formState.status === "field-errors" && (
-          <ErrorMessage error={formState.errors.name} />
-        )}
+        <div>
+          <Input label="Name" name="name" defaultValue={formState.form.name} />
+          {formState.status === "field-errors" && (
+            <ErrorMessage error={formState.errors.name} />
+          )}
+        </div>
         <Input
           label="Quantity"
           name="quantity"

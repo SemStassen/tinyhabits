@@ -2,8 +2,8 @@ import Link from "next/link";
 
 function Header() {
   return (
-    <header className="fixed left-0 top-0 w-full">
-      <div className="flex items-center justify-between bg-neutral-200 px-4 py-2">
+    <header className="fixed left-0 top-0 w-full bg-white">
+      <div className="flex items-center justify-between px-2 py-2 md:px-4">
         <Link href="/dashboard">
           <h1 className="text-2xl font-semibold">
             <small>Tiny</small>Habits
