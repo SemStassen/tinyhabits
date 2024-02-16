@@ -6,4 +6,4 @@ function ErrorMessage({ error }: ErrorProps) {
   return error && <div className="text-red-400">{error}</div>;
 }
 
-export default ErrorMessage;
+export { ErrorMessage };

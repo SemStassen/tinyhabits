@@ -15,7 +15,7 @@ export class HabitEntityValidationError extends Error {
 }
 
 export class HabitEntity {
-  private id?: number;
+  private id?: string;
   private name: string;
   private emojiNative: string;
   private quantity: number;
@@ -32,7 +32,7 @@ export class HabitEntity {
     unit,
     createdAt,
   }: {
-    id?: number;
+    id?: string;
     name: string;
     emojiNative: string;
     quantity: number;

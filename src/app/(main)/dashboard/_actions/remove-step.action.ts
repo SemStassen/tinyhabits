@@ -5,8 +5,8 @@ import { updateHabit } from "@/data-access/habits/update-habit.persistence";
 import { removeStepUseCase } from "@/use-cases/habits/remove-step.use-case";
 import { revalidatePath } from "next/cache";
 
-export async function removeStepAction(state: void, formData: FormData) {
-  const habitId = parseInt(formData.get("habitId") as string);
+export async function removeStepAction(formData: FormData) {
+  const habitId = formData.get("habitId") as string;
 
   await removeStepUseCase(
     {

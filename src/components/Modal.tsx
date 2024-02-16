@@ -1,53 +1,52 @@
-"use client";
+import { Button } from "@/components";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./shad";
+import { DialogProps } from "@radix-ui/react-dialog";
 
-import * as Dialog from "@radix-ui/react-dialog";
-import { HiMiniXMark } from "react-icons/hi2";
-
-interface ModalProps extends Dialog.DialogProps {
+interface ModalProps {
+  children: React.ReactNode;
   trigger: React.ReactNode;
   title: React.ReactNode;
-  children: React.ReactNode;
   description?: React.ReactNode;
+  open?: DialogProps["open"];
+  onOpenChange?: DialogProps["onOpenChange"];
 }
 
 function Modal({
+  children,
   trigger,
   title,
-  children,
   description,
-  ...props
+  open,
+  onOpenChange,
 }: ModalProps) {
   return (
-    <Dialog.Root {...props}>
-      <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
-      <Dialog.Portal>
-        <Dialog.Overlay className="fixed left-0 top-0 z-40 h-screen w-screen bg-black opacity-25" />
-        <Dialog.Content className="fixed left-[50%] top-[50%] z-[45] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] space-y-2 rounded-lg bg-neutral-100 px-8 py-7">
-          <Dialog.Title className="text-xl font-bold text-black">
-            {title}
-          </Dialog.Title>
-          {description && (
-            <>
-              <Dialog.Description>{description}</Dialog.Description>
-              <hr className="bg-black" />
-            </>
-          )}
-          {children}
-          <Dialog.Close className="absolute right-7 top-7">
-            <HiMiniXMark size={24} />
-          </Dialog.Close>
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogTrigger asChild>{trigger}</DialogTrigger>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+          {description && <DialogDescription>{description}</DialogDescription>}
+        </DialogHeader>
+        {children}
+        <DialogFooter className="sm:justify-start">
+          <DialogClose asChild>
+            <Button type="button" variant="secondary">
+              Close
+            </Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
 
-interface ModalCloseProps {
-  children: React.ReactNode;
-}
-
-Modal.Close = function ModalClose({ children }: ModalCloseProps) {
-  return <Dialog.Close>{children}</Dialog.Close>;
-};
-
-export default Modal;
+export { Modal };

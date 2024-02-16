@@ -2,6 +2,7 @@
 
 import { useId } from "react";
 import { Label } from "@/components";
+import { Input as ShadInput } from "./shad";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: React.ReactNode;
@@ -17,9 +18,9 @@ function Input({ label, name, ...props }: InputProps) {
       <Label id={labelId} htmlFor={inputId}>
         {label}
       </Label>
-      <input id={inputId} name={name} aria-labelledby={labelId} {...props} />
+      <ShadInput name={name} {...props} />
     </>
   );
 }
 
-export default Input;
+export { Input };

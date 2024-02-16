@@ -6,7 +6,7 @@ import HabitWidget from "./habit-widget";
 import { useState } from "react";
 import type { HabitDto } from "@/use-cases/habits/types";
 
-export type HabitAction = "edit" | "remove" | null;
+export type HabitAction = "edit" | null;
 
 function Habits({ habits }: { habits: HabitDto[] }) {
   const [action, setAction] = useState<HabitAction>(null);
@@ -19,14 +19,6 @@ function Habits({ habits }: { habits: HabitDto[] }) {
           onClick={() => setAction((prev) => (prev == "edit" ? null : "edit"))}
         >
           {action == "edit" ? "Stop editing" : "Edit habits"}
-        </Button>
-        <Button
-          variant="danger"
-          onClick={() =>
-            setAction((prev) => (prev == "remove" ? null : "remove"))
-          }
-        >
-          {action == "remove" ? "Stop removing" : "Remove habits"}
         </Button>
       </div>
       <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">

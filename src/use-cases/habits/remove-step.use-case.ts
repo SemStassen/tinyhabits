@@ -8,7 +8,7 @@ export async function removeStepUseCase(
     updateHabit: UpdateHabit;
   },
   data: {
-    habitId: number;
+    habitId: string;
   },
 ) {
   const habit = new HabitEntity(await context.getHabit(data.habitId));

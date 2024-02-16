@@ -15,4 +15,4 @@ function Emoji({ emoji, size = 24, ...props }: EmojiProps) {
   );
 }
 
-export default Emoji;
+export { Emoji };

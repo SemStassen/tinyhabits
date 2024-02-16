@@ -18,4 +18,4 @@ function Popover({ trigger, children, ...props }: PopoverProps) {
   );
 }
 
-export default Popover;
+export { Popover };

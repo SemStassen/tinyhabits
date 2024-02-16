@@ -8,11 +8,7 @@ init({ data });
 async function DashboardPage() {
   const habits = await getHabits();
 
-  return (
-    <div className="min-h-screen space-y-4 p-8">
-      <Habits habits={habits} />
-    </div>
-  );
+  return <Habits habits={habits} />;
 }
 
 export default DashboardPage;

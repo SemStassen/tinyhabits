@@ -5,7 +5,7 @@ export async function deleteHabitUseCase(
     deleteHabit: DeleteHabit;
   },
   data: {
-    habitId: number;
+    habitId: string;
   },
 ) {
   await context.deleteHabit(data.habitId);

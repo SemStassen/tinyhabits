@@ -1,11 +1,11 @@
 import "server-only";
 
 import { db } from "@/db";
-import { Habit, habits } from "@/db/schema";
+import { type Habit, habits } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { HabitDto } from "@/use-cases/habits/types";
+import type { HabitDto } from "@/use-cases/habits/types";
 
-export function toDtoMapper(habit: Habit) {
+export function toDtoMapper(habit: Habit): HabitDto {
   return {
     id: habit.id,
     name: habit.name,
@@ -17,7 +17,7 @@ export function toDtoMapper(habit: Habit) {
   };
 }
 
-export async function getHabit(habitId: number): Promise<HabitDto> {
+export async function getHabit(habitId: string): Promise<HabitDto> {
   const foundHabit = await db.query.habits.findFirst({
     where: eq(habits.id, habitId),
   });

@@ -5,10 +5,8 @@ import { updateHabit } from "@/data-access/habits/update-habit.persistence";
 import { addStepUseCase } from "@/use-cases/habits/add-step.use-case";
 import { revalidatePath } from "next/cache";
 
-export async function addStepAction(state: void, formData: FormData) {
-  const habitId = parseInt(formData.get("habitId") as string);
-
-  const habit = await addStepUseCase(
+export async function addStepAction(habitId: string) {
+  await addStepUseCase(
     {
       getHabit: getHabit,
       updateHabit: updateHabit,
