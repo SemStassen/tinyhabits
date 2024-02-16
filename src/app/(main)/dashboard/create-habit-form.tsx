@@ -44,10 +44,20 @@ function CreateHabitForm() {
       onOpenChange={setModalIsOpen}
     >
       <form action={onCreateHabitAction} ref={formRef}>
-        <EmojiPicker onEmojiSelect={(d) => setSelectedEmoji(d.native)} />
+        <div className="flex justify-center">
+          <EmojiPicker
+            size={32}
+            onEmojiSelect={(d) => setSelectedEmoji(d.native)}
+          />
+        </div>
         <input type="hidden" name="emojiNative" value={selectedEmoji} />
         <div>
-          <Input label="Name" name="name" defaultValue={formState.form.name} />
+          <Input
+            label="Name"
+            name="name"
+            defaultValue={formState.form.name}
+            autoFocus
+          />
           {formState.status === "field-errors" && (
             <ErrorMessage error={formState.errors.name} />
           )}

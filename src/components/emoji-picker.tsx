@@ -10,6 +10,7 @@ init({ data });
 
 interface EmojiPickerProps {
   onEmojiSelect?: (d: EmojiPickerData) => void;
+  size?: number;
 }
 
 export interface EmojiPickerData {
@@ -23,7 +24,7 @@ export interface EmojiPickerData {
   unified: string;
 }
 
-function EmojiPicker({ onEmojiSelect }: EmojiPickerProps) {
+function EmojiPicker({ onEmojiSelect, size }: EmojiPickerProps) {
   const [selected, setSelected] = useState<EmojiPickerData>({
     id: "droplet",
     name: "Droplet",
@@ -45,7 +46,7 @@ function EmojiPicker({ onEmojiSelect }: EmojiPickerProps) {
       align="start"
       trigger={
         <button type="button" className="aspect-square bg-white p-4">
-          <Emoji emoji={selected.native} />
+          <Emoji size={size} emoji={selected.native} />
         </button>
       }
     >
