@@ -2,16 +2,14 @@
 
 import { getHabit } from "@/data-access/habits/get-habit.persistence";
 import { updateHabit } from "@/data-access/habits/update-habit.persistence";
-import { removeStepUseCase } from "@/use-cases/habits/remove-step.use-case";
+import { addStepUseCase } from "@/use-cases/habits/add-step.use-case";
 import { revalidatePath } from "next/cache";
 
-export async function removeStepAction(formData: FormData) {
-  const habitId = parseInt(formData.get("habitId") as string);
-
-  await removeStepUseCase(
+export async function addStepAction(habitId: string) {
+  await addStepUseCase(
     {
-      getHabit,
-      updateHabit,
+      getHabit: getHabit,
+      updateHabit: updateHabit,
     },
     {
       habitId,

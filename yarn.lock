@@ -1540,6 +1540,14 @@ anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
+arctic@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/arctic/-/arctic-1.1.5.tgz#17491ecb847e18b16ee0bbe1f45c59cf00d3d68f"
+  integrity sha512-1b/hT/aZzdzYYuo9zKv0F9jVIA1jMH4b2mzVV6PSV+DdoLLBR/YSP+AHWC+OYU82P/Pl9md/mEStOy+q5Xpa/w==
+  dependencies:
+    auri "1.0.2"
+    oslo "1.0.1"
+
 arg@^5.0.2:
   version "5.0.2"
   resolved "https://registry.npmjs.org/arg/-/arg-5.0.2.tgz"

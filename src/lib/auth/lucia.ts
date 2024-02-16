@@ -15,11 +15,23 @@ export const lucia = new Lucia(adapter, {
       secure: process.env.NODE_ENV === "production",
     },
   },
+  getUserAttributes: (attributes) => {
+    return {
+      id: attributes.id,
+      name: attributes.name,
+    };
+  },
 });
 
 // IMPORTANT!
 declare module "lucia" {
   interface Register {
     Lucia: typeof lucia;
+    DatabaseUserAttributes: DatabaseUserAttributes;
   }
+}
+
+interface DatabaseUserAttributes {
+  id: number;
+  name: string;
 }

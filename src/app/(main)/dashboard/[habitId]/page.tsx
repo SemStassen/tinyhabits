@@ -10,7 +10,7 @@ interface HabitPageProps {
 }
 
 async function HabitPage({ params }: HabitPageProps) {
-  const habit = await getHabit(parseInt(params.habitId));
+  const habit = await getHabit(params.habitId);
 
   if (!habit) {
     throw new Error("Habit not found");

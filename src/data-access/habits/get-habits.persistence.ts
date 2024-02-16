@@ -8,7 +8,8 @@ import { habits } from "@/db/schema";
 
 export async function getHabits(): Promise<HabitDto[]> {
   const foundHabits = await db.query.habits.findMany({
-    orderBy: [asc(habits.id)]
+    orderBy: [asc(habits.id)],
   });
+
   return foundHabits.map(toDtoMapper);
 }

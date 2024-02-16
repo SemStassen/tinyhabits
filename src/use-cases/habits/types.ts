@@ -1,5 +1,5 @@
 export interface HabitDto {
-  id: number;
+  id: string;
   name: string;
   emojiNative: string;
   quantity: number;
@@ -18,7 +18,7 @@ export interface CreateHabitDto {
 
 // data-access functions
 export type CreateHabit = (habit: CreateHabitDto) => Promise<void>;
-export type DeleteHabit = (habitId: number) => Promise<void>;
-export type GetHabit = (habitId: number) => Promise<HabitDto>;
+export type DeleteHabit = (habitId: string) => Promise<void>;
+export type GetHabit = (habitId: string) => Promise<HabitDto>;
 export type GetHabits = () => Promise<HabitDto[]>;
 export type UpdateHabit = (habit: HabitDto) => Promise<void>;
