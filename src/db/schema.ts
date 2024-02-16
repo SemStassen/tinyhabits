@@ -12,7 +12,9 @@ export const users = pgTable("users", {
 });
 
 export const sessions = pgTable("sessions", {
-  id: uuid("id").defaultRandom().primaryKey(),
+  id: varchar("id", {
+    length: 255,
+  }).primaryKey(),
   userId: uuid("user_id")
     .references(() => users.id)
     .notNull(),
