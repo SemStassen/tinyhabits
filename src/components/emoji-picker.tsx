@@ -61,4 +61,4 @@ function EmojiPicker({ onEmojiSelect }: EmojiPickerProps) {
   );
 }
 
-export default EmojiPicker;
+export { EmojiPicker };

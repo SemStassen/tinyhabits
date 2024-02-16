@@ -6,7 +6,7 @@ import { removeStepAction } from "./_actions/remove-step.action";
 import type { HabitAction } from "./habits";
 import type { HabitDto } from "@/use-cases/habits/types";
 import { Emoji } from "@/components";
-import { X, Plus, Minus } from "lucide-react";
+import { X } from "lucide-react";
 import {
   startTransition,
   useEffect,

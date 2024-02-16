@@ -1,7 +1,7 @@
 import { Button } from "@/components/button";
 import { Emoji } from "@/components/emoji";
 import { getHabit } from "@/data-access/habits/get-habit.persistence";
-import { Ghost, Pencil } from "lucide-react";
+import { Pencil } from "lucide-react";
 
 interface HabitPageProps {
   params: {
