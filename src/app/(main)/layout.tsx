@@ -1,6 +1,6 @@
 import Header from "./header";
 
-function mainLayout({ children }: { children: React.ReactNode }) {
+async function mainLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Header />
